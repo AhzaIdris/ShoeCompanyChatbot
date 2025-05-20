@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
+
+.chatbot-container {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    width: 300px;
+}
+
+select, button {
+    margin-top: 10px;
+    width: 100%;
+    padding: 10px;
+}
+
+.result-box {
+    margin-top: 20px;
+    background: #eaf7ea;
+    padding: 15px;
+    border-radius: 5px;
+}

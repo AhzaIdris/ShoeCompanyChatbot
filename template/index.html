@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Shoe Chatbot</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="chatbot-container">
+        <h2>Find Your Perfect Shoe</h2>
+
+        <label for="category">Choose Shoe Type:</label>
+        <select id="category">
+            <option>Kid Shoes</option>
+            <option>Sport Shoes</option>
+            <option>Formal Shoes</option>
+        </select>
+
+        <label for="material">Choose Material:</label>
+        <select id="material">
+            <option>Leather</option>
+            <option>Canvas</option>
+            <option>Denim</option>
+            <option>Rubber</option>
+            <option>Sol</option>
+        </select>
+
+        <label for="size">Choose Size (EU):</label>
+        <select id="size">
+            {% for s in range(36, 46) %}
+                <option>{{ s }}</option>
+            {% endfor %}
+        </select>
+
+        <button onclick="getShoe()">Show Me My Shoe</button>
+
+        <div id="result" class="result-box"></div>
+    </div>
+
+    <script>
+        function getShoe() {
+            const category = document.getElementById("category").value;
+            const material = document.getElementById("material").value;
+            const size = document.getElementById("size").value;
+
+            fetch("/get_shoe", {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({category, material, size})
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById("result").innerHTML = `
+                    <p><strong>Product:</strong> ${data.description}</p>
+                `;
+            });
+        }
+    </script>
+</body>
+</html>
